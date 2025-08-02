@@ -8,7 +8,7 @@ export const Navigation = () => {
   const navItems = [
     { name: "Home", path: "/", active: location.pathname === "/" },
     { name: "About", path: "/about", active: location.pathname === "/about" },
-    { name: "Status", path: "/status", active: false },
+    { name: "Status", path: "/status", active: location.pathname === "/status" },
     { name: "Injects", path: "/injects", active: false },
     { name: "Admin", path: "/admin", active: false },
   ];
