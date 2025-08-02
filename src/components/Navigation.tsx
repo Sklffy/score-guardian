@@ -19,7 +19,7 @@ export const Navigation = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-atlantis-cyan/5 to-transparent opacity-50"></div>
       
       <Link to="/" className="flex items-center gap-2 relative z-10 group">
-        <Shield className="w-6 h-6 text-atlantis-cyan transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-lg" />
+        <img src="/lovable-uploads/a3135964-1858-405a-b4a7-d22f85a9ab28.png" alt="ATLANTIS Logo" className="w-6 h-6 transition-all duration-300 group-hover:scale-110" />
         <span className="font-bold text-lg text-atlantis-cyan transition-all duration-300 group-hover:text-atlantis-teal">
           ATLANTIS
         </span>
@@ -33,8 +33,8 @@ export const Navigation = () => {
                 variant="ghost"
                 className={`text-sm font-medium transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 ${
                   item.active 
-                    ? "text-atlantis-cyan border-b-2 border-atlantis-cyan rounded-none shadow-glow-cyan" 
-                    : "text-muted-foreground hover:text-atlantis-cyan hover:shadow-glow-subtle"
+                    ? "text-atlantis-cyan border-b-2 border-atlantis-cyan rounded-none" 
+                    : "text-muted-foreground hover:text-atlantis-cyan"
                 }`}
               >
                 {item.name}

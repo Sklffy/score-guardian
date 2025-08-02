@@ -42,8 +42,7 @@ export const ScoreboardHeader = ({ scoreData, isLoading, lastUpdate }: Scoreboar
       {/* Logo and Title */}
       <div className="flex flex-col items-center gap-4 mb-8 relative z-10">
         <div className="relative group">
-          <Shield className="w-16 h-16 text-atlantis-cyan pulse-glow transition-all duration-500 group-hover:scale-110 cursor-pointer" />
-          <div className="absolute inset-0 w-16 h-16 border-2 border-atlantis-cyan rounded-lg animate-pulse opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+          <img src="/lovable-uploads/a3135964-1858-405a-b4a7-d22f85a9ab28.png" alt="ATLANTIS Logo" className="w-16 h-16 transition-all duration-500 group-hover:scale-110 cursor-pointer" />
         </div>
         <h1 className="text-4xl font-bold">
           <span className="text-atlantis-cyan">ATLANTIS</span>{" "}
@@ -60,7 +59,7 @@ export const ScoreboardHeader = ({ scoreData, isLoading, lastUpdate }: Scoreboar
       </div>
 
       {/* Stats Panel */}
-      <div className="max-w-md mx-auto bg-atlantis-card border border-atlantis-border rounded-lg p-6 shadow-glow-subtle">
+      <div className="max-w-md mx-auto bg-atlantis-card border border-atlantis-border rounded-lg p-6">
         <div className="space-y-4 text-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -90,7 +89,7 @@ export const ScoreboardHeader = ({ scoreData, isLoading, lastUpdate }: Scoreboar
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Shield className="w-4 h-4 text-atlantis-cyan" />
+              <img src="/lovable-uploads/a3135964-1858-405a-b4a7-d22f85a9ab28.png" alt="ATLANTIS" className="w-4 h-4" />
               <span className="text-atlantis-cyan">Latest Inject:</span>
             </div>
             <span className="text-foreground font-mono text-xs">

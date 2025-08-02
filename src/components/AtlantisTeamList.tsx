@@ -27,9 +27,9 @@ export const AtlantisTeamList = ({ teams }: AtlantisTeamListProps) => {
           <div
             key={team.id}
             className={cn(
-              "bg-atlantis-card border rounded-lg p-6 interactive-card hover-glow",
+              "bg-atlantis-card border rounded-lg p-6 interactive-card",
               "transform transition-all duration-500 hover:scale-[1.02]",
-              isLeading ? "border-atlantis-cyan shadow-glow-cyan ring-2 ring-atlantis-cyan/30" : "border-atlantis-border hover:border-atlantis-cyan/50",
+              isLeading ? "border-atlantis-cyan ring-2 ring-atlantis-cyan/30" : "border-atlantis-border hover:border-atlantis-cyan/50",
               "fade-in-up"
             )}
             style={{ animationDelay: `${index * 200}ms` }}
@@ -87,7 +87,7 @@ export const AtlantisTeamList = ({ teams }: AtlantisTeamListProps) => {
               {/* Overall Status */}
               <div className="bg-atlantis-cyan/10 border border-atlantis-cyan/30 rounded-lg p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <Shield className="w-5 h-5 text-atlantis-cyan" />
+                  <img src="/lovable-uploads/a3135964-1858-405a-b4a7-d22f85a9ab28.png" alt="ATLANTIS" className="w-5 h-5" />
                   <span className="font-semibold text-atlantis-cyan">Overall</span>
                 </div>
                 <div className="text-2xl font-bold text-atlantis-cyan">

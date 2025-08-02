@@ -10,7 +10,7 @@ export const ServiceStatus = ({ service }: ServiceStatusProps) => {
   const getStatusIcon = () => {
     switch (service.status) {
       case 'up':
-        return <Shield className="w-4 h-4" />;
+        return <img src="/lovable-uploads/a3135964-1858-405a-b4a7-d22f85a9ab28.png" alt="Service Up" className="w-4 h-4" />;
       case 'down':
         return <ShieldAlert className="w-4 h-4" />;
       default:
@@ -33,9 +33,7 @@ export const ServiceStatus = ({ service }: ServiceStatusProps) => {
     <div className={cn(
       "flex items-center justify-between p-3 rounded-lg border-2 transition-all duration-300",
       "hover:shadow-lg hover:scale-105",
-      getStatusColor(),
-      service.status === 'up' && "shadow-glow-green animate-pulse-glow",
-      service.status === 'down' && "shadow-glow-red"
+      getStatusColor()
     )}>
       <div className="flex items-center gap-2">
         {getStatusIcon()}

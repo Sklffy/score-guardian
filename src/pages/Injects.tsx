@@ -67,8 +67,7 @@ const Injects = () => {
       <div className="text-center py-12">
         <div className="flex flex-col items-center gap-4 mb-8">
           <div className="relative">
-            <Shield className="w-16 h-16 text-atlantis-cyan animate-pulse-glow" />
-            <div className="absolute inset-0 w-16 h-16 border-2 border-atlantis-cyan rounded-lg animate-pulse opacity-30"></div>
+            <img src="/lovable-uploads/a3135964-1858-405a-b4a7-d22f85a9ab28.png" alt="ATLANTIS Injects" className="w-16 h-16" />
           </div>
           <h1 className="text-4xl font-bold">
             <span className="text-atlantis-cyan">Inject</span>{" "}

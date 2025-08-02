@@ -17,7 +17,7 @@ const About = () => {
       {/* Navigation */}
       <nav className="flex items-center justify-between p-4 border-b border-atlantis-border bg-atlantis-dark">
         <Link to="/" className="flex items-center gap-2">
-          <Shield className="w-6 h-6 text-atlantis-cyan" />
+          <img src="/lovable-uploads/a3135964-1858-405a-b4a7-d22f85a9ab28.png" alt="ATLANTIS Logo" className="w-6 h-6" />
           <span className="font-bold text-lg text-atlantis-cyan">ATLANTIS</span>
         </Link>
         
@@ -49,7 +49,7 @@ const About = () => {
           <img 
             src="/lovable-uploads/511af799-ea03-4d33-9c1a-452f1ba87c1c.png" 
             alt="ATLANTIS Logo" 
-            className="w-24 h-24 animate-pulse-glow"
+            className="w-24 h-24"
           />
         </div>
 
@@ -59,7 +59,7 @@ const About = () => {
         </h1>
 
         {/* Content Card */}
-        <div className="max-w-4xl mx-auto bg-atlantis-card border border-atlantis-border rounded-lg p-8 shadow-glow-subtle">
+        <div className="max-w-4xl mx-auto bg-atlantis-card border border-atlantis-border rounded-lg p-8">
           <div className="space-y-6 text-foreground">
             <p className="text-lg">
               <span className="text-atlantis-cyan font-semibold">ATLANTIS Scoreboard</span> was developed by{" "}
@@ -97,7 +97,7 @@ const About = () => {
             {/* Action Buttons */}
             <div className="flex gap-4 justify-center pt-6">
               <Button 
-                className="bg-atlantis-cyan text-atlantis-dark hover:bg-atlantis-teal transition-colors duration-300 shadow-glow-cyan"
+                className="bg-atlantis-cyan text-atlantis-dark hover:bg-atlantis-teal transition-colors duration-300"
                 onClick={() => window.open('https://github.com', '_blank')}
               >
                 <Github className="w-4 h-4 mr-2" />

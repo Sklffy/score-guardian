@@ -76,7 +76,7 @@ const Admin = () => {
           {/* Header */}
           <div className="text-center mb-8">
             <div className="flex justify-center mb-4">
-              <Shield className="w-16 h-16 text-atlantis-cyan animate-pulse-glow" />
+              <img src="/lovable-uploads/a3135964-1858-405a-b4a7-d22f85a9ab28.png" alt="ATLANTIS Admin" className="w-16 h-16" />
             </div>
             <h1 className="text-4xl font-bold">
               <span className="text-atlantis-cyan">Admin</span>{" "}
@@ -97,7 +97,7 @@ const Admin = () => {
                 Competition Settings
               </TabsTrigger>
               <TabsTrigger value="overview" className="data-[state=active]:bg-atlantis-cyan data-[state=active]:text-atlantis-dark">
-                <Shield className="w-4 h-4 mr-2" />
+                <img src="/lovable-uploads/a3135964-1858-405a-b4a7-d22f85a9ab28.png" alt="Overview" className="w-4 h-4 mr-2" />
                 Overview
               </TabsTrigger>
             </TabsList>
@@ -208,10 +208,10 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-gradient-bg flex items-center justify-center">
-      <Card className="w-full max-w-md bg-atlantis-card border-atlantis-border shadow-glow-subtle">
+      <Card className="w-full max-w-md bg-atlantis-card border-atlantis-border">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <Lock className="w-16 h-16 text-atlantis-cyan animate-pulse-glow" />
+            <Lock className="w-16 h-16 text-atlantis-cyan" />
           </div>
           <CardTitle className="text-2xl">
             <span className="text-atlantis-cyan">Admin</span>{" "}
