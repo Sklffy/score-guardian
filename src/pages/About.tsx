@@ -30,15 +30,21 @@ const About = () => {
           <Button variant="ghost" className="text-sm font-medium text-atlantis-cyan border-b-2 border-atlantis-cyan rounded-none">
             About
           </Button>
-          <Button variant="ghost" className="text-sm font-medium text-muted-foreground hover:text-atlantis-cyan">
-            Status
-          </Button>
-          <Button variant="ghost" className="text-sm font-medium text-muted-foreground hover:text-atlantis-cyan">
-            Injects
-          </Button>
-          <Button variant="ghost" className="text-sm font-medium text-muted-foreground hover:text-atlantis-cyan">
-            Admin
-          </Button>
+          <Link to="/status">
+            <Button variant="ghost" className="text-sm font-medium text-muted-foreground hover:text-atlantis-cyan">
+              Status
+            </Button>
+          </Link>
+          <Link to="/injects">
+            <Button variant="ghost" className="text-sm font-medium text-muted-foreground hover:text-atlantis-cyan">
+              Injects
+            </Button>
+          </Link>
+          <Link to="/admin">
+            <Button variant="ghost" className="text-sm font-medium text-muted-foreground hover:text-atlantis-cyan">
+              Admin
+            </Button>
+          </Link>
         </div>
       </nav>
 
