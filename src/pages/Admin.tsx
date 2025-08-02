@@ -207,7 +207,58 @@ const Admin = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-bg flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-bg">
+      {/* Navigation */}
+      <nav className="flex items-center justify-between p-4 border-b border-atlantis-border bg-atlantis-dark">
+        <Button 
+          onClick={() => navigate("/")}
+          variant="ghost"
+          className="flex items-center gap-2"
+        >
+          <img src="/lovable-uploads/a3135964-1858-405a-b4a7-d22f85a9ab28.png" alt="ATLANTIS Logo" className="w-6 h-6" />
+          <span className="font-bold text-lg text-atlantis-cyan">ATLANTIS</span>
+        </Button>
+        
+        <div className="flex items-center gap-6">
+          <Button 
+            onClick={() => navigate("/")}
+            variant="ghost" 
+            className="text-sm font-medium text-muted-foreground hover:text-atlantis-cyan"
+          >
+            Home
+          </Button>
+          <Button 
+            onClick={() => navigate("/about")}
+            variant="ghost" 
+            className="text-sm font-medium text-muted-foreground hover:text-atlantis-cyan"
+          >
+            About
+          </Button>
+          <Button 
+            onClick={() => navigate("/status")}
+            variant="ghost" 
+            className="text-sm font-medium text-muted-foreground hover:text-atlantis-cyan"
+          >
+            Status
+          </Button>
+          <Button 
+            onClick={() => navigate("/injects")}
+            variant="ghost" 
+            className="text-sm font-medium text-muted-foreground hover:text-atlantis-cyan"
+          >
+            Injects
+          </Button>
+          <Button 
+            variant="ghost" 
+            className="text-sm font-medium text-atlantis-cyan border-b-2 border-atlantis-cyan rounded-none"
+          >
+            Admin
+          </Button>
+        </div>
+      </nav>
+
+      {/* Login Content */}
+      <div className="flex items-center justify-center min-h-[calc(100vh-80px)]">
       <Card className="w-full max-w-md bg-atlantis-card border-atlantis-border">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
@@ -263,6 +314,7 @@ const Admin = () => {
           </div>
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 };
