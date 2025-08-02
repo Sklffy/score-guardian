@@ -53,7 +53,7 @@ export const ScoreboardHeader = ({ scoreData, isLoading, lastUpdate }: Scoreboar
 
       {/* Teams Section */}
       <div className="max-w-2xl mx-auto mb-8">
-        <div className="flex items-center gap-2 mb-6 text-atlantis-cyan">
+        <div className="flex items-center gap-2 mb-6 text-atlantis-cyan justify-center">
           <Users className="w-5 h-5" />
           <h2 className="text-xl font-semibold">Teams</h2>
         </div>
