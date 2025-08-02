@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
 
 const Index = () => {
-  const { scoreData, isLoading, error, lastUpdate, refetch } = useScoreData(30000);
+  const { scoreData, isLoading, error, lastUpdate, refetch } = useScoreData(10000);
 
   return (
     <div className="min-h-screen bg-gradient-bg">
@@ -77,7 +77,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-6 text-center text-muted-foreground">
           <p>Cyber Defense Competition Scoring Engine</p>
           <p className="text-sm mt-1">
-            Updates every 30 seconds • Place scores.json in public folder for live data
+            Updates every 10 seconds • Place scores.json in public folder for live data
           </p>
         </div>
       </footer>
