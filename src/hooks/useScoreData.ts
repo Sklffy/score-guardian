@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ScoreData } from '@/types/scoring';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 export const useScoreData = (refreshInterval = 30000) => {
   const [scoreData, setScoreData] = useState<ScoreData | null>(null);
@@ -14,45 +15,84 @@ export const useScoreData = (refreshInterval = 30000) => {
     setError(null);
 
     try {
-      // In a real implementation, this would fetch from your Python backend's scores.json
-      // For demo purposes, we'll generate mock data
-      const response = await fetch('/scores.json').catch(() => {
-        // Fallback to mock data if scores.json doesn't exist
-        throw new Error('scores.json not found');
+      // Fetch real data from Supabase
+      const [teamsResult, servicesResult, serviceChecksResult, competitionResult] = await Promise.all([
+        supabase.from('teams').select('*'),
+        supabase.from('services').select('*'),
+        supabase.from('service_checks').select('*'),
+        supabase.from('competition_settings').select('*').single()
+      ]);
+
+      if (teamsResult.error || servicesResult.error || serviceChecksResult.error) {
+        throw new Error('Database error');
+      }
+
+      const teams = teamsResult.data || [];
+      const services = servicesResult.data || [];
+      const serviceChecks = serviceChecksResult.data || [];
+      const competition = competitionResult.data;
+
+      // Transform data to match ScoreData interface
+      const transformedTeams = teams.map(team => {
+        const teamServices = services.map(service => {
+          const check = serviceChecks.find(c => c.team_id === team.id && c.service_id === service.id);
+          return {
+            name: service.name,
+            protocol: service.protocol,
+            port: service.port,
+            status: (check?.status || 'unknown') as 'up' | 'down' | 'unknown',
+            lastChecked: check?.last_checked || new Date().toISOString(),
+            uptime: check?.uptime_percentage || 0,
+            points: check?.points || 0
+          };
+        });
+
+        const totalScore = teamServices.reduce((acc, service) => 
+          acc + (service.status === 'up' ? service.points : 0), 0
+        );
+
+        return {
+          id: team.id,
+          name: team.name,
+          ip: team.ip.toString(),
+          services: teamServices,
+          totalScore,
+          rank: 0 // Will be calculated below
+        };
       });
 
-      let data: ScoreData;
-      
-      if (response.ok) {
-        data = await response.json();
-      } else {
-        // Generate mock data for demonstration
-        data = generateMockData();
-      }
+      // Calculate ranks
+      transformedTeams.sort((a, b) => b.totalScore - a.totalScore);
+      transformedTeams.forEach((team, index) => {
+        team.rank = index + 1;
+      });
+
+      const data: ScoreData = {
+        teams: transformedTeams,
+        lastUpdate: new Date().toISOString(),
+        round: Math.floor((Date.now() - new Date(competition?.start_time || Date.now()).getTime()) / 60000) + 1,
+        competition: {
+          name: competition?.name || 'CyberDefense Competition',
+          startTime: competition?.start_time || new Date().toISOString(),
+          duration: (competition?.duration_hours || 8) * 60 * 60
+        }
+      };
 
       setScoreData(data);
       setLastUpdate(new Date());
       
     } catch (err) {
-      // Generate mock data for demo
-      const mockData = generateMockData();
-      setScoreData(mockData);
-      setLastUpdate(new Date());
-      
-      console.warn('Using mock data - place your scores.json in the public folder');
-      
-      if (error === null) { // Only show error once
-        setError('Unable to fetch live data - using demo data');
-        toast({
-          title: "Demo Mode",
-          description: "Place your scores.json file in the public folder for live data",
-          variant: "default",
-        });
-      }
+      console.error('Error fetching score data:', err);
+      setError('Unable to fetch live data');
+      toast({
+        title: "Error",
+        description: "Unable to fetch live data from database",
+        variant: "destructive",
+      });
     } finally {
       setIsLoading(false);
     }
-  }, [error, toast]);
+  }, [toast]);
 
   useEffect(() => {
     fetchScoreData();

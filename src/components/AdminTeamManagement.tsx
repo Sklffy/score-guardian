@@ -3,8 +3,10 @@ import { Team } from "@/types/scoring";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Plus, Minus, RotateCcw } from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { Plus, Minus, RotateCcw, Play } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface AdminTeamManagementProps {
   teams: Team[];
@@ -13,6 +15,10 @@ interface AdminTeamManagementProps {
 
 export const AdminTeamManagement = ({ teams, onTeamsUpdate }: AdminTeamManagementProps) => {
   const [pointInputs, setPointInputs] = useState<{[key: string]: string}>({});
+  const [teamName, setTeamName] = useState('');
+  const [teamIP, setTeamIP] = useState('');
+  const [isAdding, setIsAdding] = useState(false);
+  const [isChecking, setIsChecking] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -134,8 +140,130 @@ export const AdminTeamManagement = ({ teams, onTeamsUpdate }: AdminTeamManagemen
     });
   };
 
+  const addTeam = async () => {
+    if (!teamName || !teamIP) {
+      toast({
+        title: "Error",
+        description: "Please enter both team name and IP address",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsAdding(true);
+    try {
+      const { error } = await supabase
+        .from('teams')
+        .insert({ name: teamName, ip: teamIP });
+
+      if (error) throw error;
+
+      toast({
+        title: "Success",
+        description: "Team added successfully",
+      });
+      
+      setTeamName('');
+      setTeamIP('');
+      
+      // Refresh data will happen automatically through the parent component
+      window.location.reload();
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setIsAdding(false);
+    }
+  };
+
+  const runServiceChecks = async () => {
+    setIsChecking(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('check-services');
+      
+      if (error) throw error;
+
+      toast({
+        title: "Service Checks Complete",
+        description: `Completed ${data.checks_completed} checks`,
+      });
+      
+      // Refresh data
+      setTimeout(() => window.location.reload(), 1000);
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setIsChecking(false);
+    }
+  };
+
   return (
     <div className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Add Team Card */}
+        <Card className="bg-atlantis-card border-atlantis-border">
+          <CardHeader>
+            <CardTitle className="text-atlantis-cyan">Add New Team</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <Label htmlFor="teamName">Team Name</Label>
+              <Input
+                id="teamName"
+                value={teamName}
+                onChange={(e) => setTeamName(e.target.value)}
+                placeholder="e.g., Red Team"
+                className="bg-atlantis-dark border-atlantis-border text-foreground"
+              />
+            </div>
+            <div>
+              <Label htmlFor="teamIP">Team IP Address</Label>
+              <Input
+                id="teamIP"
+                value={teamIP}
+                onChange={(e) => setTeamIP(e.target.value)}
+                placeholder="e.g., 192.168.1.10"
+                className="bg-atlantis-dark border-atlantis-border text-foreground"
+              />
+            </div>
+            <Button 
+              onClick={addTeam} 
+              disabled={isAdding}
+              className="w-full bg-atlantis-cyan text-atlantis-dark hover:bg-atlantis-teal"
+            >
+              {isAdding ? 'Adding...' : 'Add Team'}
+            </Button>
+          </CardContent>
+        </Card>
+
+        {/* Service Monitoring Card */}
+        <Card className="bg-atlantis-card border-atlantis-border">
+          <CardHeader>
+            <CardTitle className="text-atlantis-cyan">Service Monitoring</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-muted-foreground text-sm">
+              Run automated checks on all team services to update their status and scores.
+            </p>
+            <Button 
+              onClick={runServiceChecks} 
+              disabled={isChecking}
+              className="w-full bg-status-up text-white hover:bg-status-up/80"
+            >
+              <Play className="w-4 h-4 mr-2" />
+              {isChecking ? 'Checking Services...' : 'Run Service Checks'}
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+
       <h2 className="text-2xl font-bold text-atlantis-cyan">Team Score Management</h2>
       
       <div className="grid gap-4">

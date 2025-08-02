@@ -14,7 +14,132 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      competition_settings: {
+        Row: {
+          check_interval_seconds: number
+          created_at: string
+          duration_hours: number
+          id: string
+          name: string
+          start_time: string
+        }
+        Insert: {
+          check_interval_seconds?: number
+          created_at?: string
+          duration_hours?: number
+          id?: string
+          name?: string
+          start_time?: string
+        }
+        Update: {
+          check_interval_seconds?: number
+          created_at?: string
+          duration_hours?: number
+          id?: string
+          name?: string
+          start_time?: string
+        }
+        Relationships: []
+      }
+      service_checks: {
+        Row: {
+          created_at: string
+          id: string
+          last_checked: string
+          points: number
+          response_time: number | null
+          service_id: string
+          status: string
+          team_id: string
+          uptime_percentage: number | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_checked?: string
+          points?: number
+          response_time?: number | null
+          service_id: string
+          status: string
+          team_id: string
+          uptime_percentage?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_checked?: string
+          points?: number
+          response_time?: number | null
+          service_id?: string
+          status?: string
+          team_id?: string
+          uptime_percentage?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_checks_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "service_checks_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      services: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          port: number
+          protocol: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          port: number
+          protocol: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          port?: number
+          protocol?: string
+        }
+        Relationships: []
+      }
+      teams: {
+        Row: {
+          created_at: string
+          id: string
+          ip: unknown
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          ip: unknown
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          ip?: unknown
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -103,16 +103,10 @@ const Admin = () => {
             </TabsList>
             
             <TabsContent value="teams" className="mt-6">
-              {adminTeams.length > 0 ? (
-                <AdminTeamManagement 
-                  teams={adminTeams} 
-                  onTeamsUpdate={handleTeamsUpdate}
-                />
-              ) : (
-                <Card className="bg-atlantis-card border-atlantis-border p-8 text-center">
-                  <p className="text-muted-foreground">Loading team data...</p>
-                </Card>
-              )}
+              <AdminTeamManagement 
+                teams={adminTeams} 
+                onTeamsUpdate={handleTeamsUpdate}
+              />
             </TabsContent>
             
             <TabsContent value="competition" className="mt-6">
