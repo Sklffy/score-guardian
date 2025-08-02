@@ -1,21 +1,23 @@
 import { useScoreData } from "@/hooks/useScoreData";
+import { Navigation } from "@/components/Navigation";
 import { ScoreboardHeader } from "@/components/ScoreboardHeader";
-import { TeamCard } from "@/components/TeamCard";
+import { AtlantisTeamList } from "@/components/AtlantisTeamList";
 import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
 
 const Index = () => {
-  const { scoreData, isLoading, error, lastUpdate, refetch } = useScoreData(10000);
+  const { scoreData, isLoading, error, lastUpdate, refetch } = useScoreData(60000);
 
   return (
     <div className="min-h-screen bg-gradient-bg">
+      <Navigation />
       <ScoreboardHeader 
         scoreData={scoreData}
         isLoading={isLoading}
         lastUpdate={lastUpdate}
       />
       
-      <main className="max-w-7xl mx-auto p-6">
+      <main className="max-w-7xl mx-auto px-6 pb-12">
         {error && (
           <div className="mb-6 p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-center">
             <p className="text-destructive mb-2">{error}</p>
@@ -32,17 +34,7 @@ const Index = () => {
         )}
 
         {scoreData?.teams && scoreData.teams.length > 0 ? (
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-            {scoreData.teams.map((team, index) => (
-              <div 
-                key={team.id} 
-                className="animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <TeamCard team={team} />
-              </div>
-            ))}
-          </div>
+          <AtlantisTeamList teams={scoreData.teams} />
         ) : !isLoading ? (
           <div className="text-center py-12">
             <h2 className="text-2xl font-semibold mb-4">No Teams Found</h2>
@@ -55,16 +47,12 @@ const Index = () => {
             </Button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="max-w-2xl mx-auto space-y-4">
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="animate-pulse">
-                <div className="bg-card border border-border rounded-lg p-6 h-96">
-                  <div className="h-6 bg-muted rounded mb-4"></div>
-                  <div className="space-y-3">
-                    {[1, 2, 3, 4].map((j) => (
-                      <div key={j} className="h-16 bg-muted rounded"></div>
-                    ))}
-                  </div>
+                <div className="bg-atlantis-card border border-atlantis-border rounded-lg p-4 h-20">
+                  <div className="h-4 bg-muted rounded mb-2"></div>
+                  <div className="h-3 bg-muted rounded w-1/2"></div>
                 </div>
               </div>
             ))}
@@ -73,11 +61,11 @@ const Index = () => {
       </main>
       
       {/* Footer */}
-      <footer className="border-t border-border mt-12 py-6">
+      <footer className="border-t border-atlantis-border py-6">
         <div className="max-w-7xl mx-auto px-6 text-center text-muted-foreground">
-          <p>Cyber Defense Competition Scoring Engine</p>
-          <p className="text-sm mt-1">
-            Updates every 10 seconds • Place scores.json in public folder for live data
+          <p className="text-sm">© 2025 ATLANTIS Cyber Defense Platform. All rights reserved.</p>
+          <p className="text-xs mt-1">
+            Updates every minute • Place scores.json in public folder for live data
           </p>
         </div>
       </footer>

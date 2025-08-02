@@ -8,60 +8,60 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 210 30% 8%;
-    --foreground: 180 100% 90%;
+    --background: 210 40% 6%;
+    --foreground: 180 100% 85%;
 
-    --card: 210 25% 12%;
-    --card-foreground: 180 100% 90%;
+    --card: 210 35% 8%;
+    --card-foreground: 180 100% 85%;
 
-    --popover: 210 25% 12%;
-    --popover-foreground: 180 100% 90%;
+    --popover: 210 35% 8%;
+    --popover-foreground: 180 100% 85%;
 
-    --primary: 120 100% 50%;
-    --primary-foreground: 210 30% 8%;
+    --primary: 180 100% 50%;
+    --primary-foreground: 210 40% 6%;
 
-    --secondary: 210 20% 20%;
-    --secondary-foreground: 180 100% 90%;
+    --secondary: 210 30% 12%;
+    --secondary-foreground: 180 100% 85%;
 
-    --muted: 210 20% 15%;
-    --muted-foreground: 180 30% 60%;
+    --muted: 210 25% 10%;
+    --muted-foreground: 180 50% 60%;
 
-    --accent: 0 100% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 180 100% 50%;
+    --accent-foreground: 210 40% 6%;
 
     --destructive: 0 100% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 20% 20%;
-    --input: 210 20% 15%;
-    --ring: 120 100% 50%;
+    --border: 180 100% 50% / 0.2;
+    --input: 210 25% 10%;
+    --ring: 180 100% 50%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    /* Cyber theme colors */
-    --cyber-green: 120 100% 50%;
-    --cyber-red: 0 100% 60%;
-    --cyber-blue: 200 100% 60%;
-    --cyber-purple: 280 100% 70%;
-    --cyber-orange: 30 100% 60%;
+    /* ATLANTIS theme colors */
+    --atlantis-cyan: 180 100% 50%;
+    --atlantis-teal: 180 100% 40%;
+    --atlantis-dark: 210 40% 6%;
+    --atlantis-card: 210 35% 8%;
+    --atlantis-border: 180 100% 50% / 0.3;
     
     /* Status colors */
-    --status-up: 120 100% 50%;
+    --status-up: 120 100% 45%;
     --status-down: 0 100% 60%;
-    --status-unknown: 45 100% 60%;
+    --status-unknown: 45 100% 55%;
     
     /* Gradients */
-    --gradient-cyber: linear-gradient(135deg, hsl(120 100% 50%), hsl(200 100% 60%));
-    --gradient-danger: linear-gradient(135deg, hsl(0 100% 60%), hsl(15 100% 50%));
-    --gradient-bg: linear-gradient(180deg, hsl(210 30% 8%), hsl(210 25% 6%));
+    --gradient-atlantis: linear-gradient(135deg, hsl(210 40% 6%), hsl(210 35% 8%));
+    --gradient-cyber: linear-gradient(135deg, hsl(180 100% 50%), hsl(180 100% 40%));
+    --gradient-bg: linear-gradient(180deg, hsl(210 40% 6%), hsl(210 35% 4%));
     
     /* Glows */
-    --glow-green: 0 0 20px hsl(120 100% 50% / 0.5);
-    --glow-red: 0 0 20px hsl(0 100% 60% / 0.5);
-    --glow-blue: 0 0 20px hsl(200 100% 60% / 0.3);
+    --glow-cyan: 0 0 20px hsl(180 100% 50% / 0.4);
+    --glow-teal: 0 0 30px hsl(180 100% 40% / 0.3);
+    --glow-subtle: 0 0 15px hsl(180 100% 50% / 0.1);
     
     /* Animations */
-    --transition-cyber: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-atlantis: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
 

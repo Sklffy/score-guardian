@@ -62,12 +62,12 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				cyber: {
-					green: 'hsl(var(--cyber-green))',
-					red: 'hsl(var(--cyber-red))',
-					blue: 'hsl(var(--cyber-blue))',
-					purple: 'hsl(var(--cyber-purple))',
-					orange: 'hsl(var(--cyber-orange))'
+				atlantis: {
+					cyan: 'hsl(var(--atlantis-cyan))',
+					teal: 'hsl(var(--atlantis-teal))',
+					dark: 'hsl(var(--atlantis-dark))',
+					card: 'hsl(var(--atlantis-card))',
+					border: 'hsl(var(--atlantis-border))'
 				},
 				status: {
 					up: 'hsl(var(--status-up))',
@@ -76,14 +76,14 @@ export default {
 				}
 			},
 			backgroundImage: {
+				'gradient-atlantis': 'var(--gradient-atlantis)',
 				'gradient-cyber': 'var(--gradient-cyber)',
-				'gradient-danger': 'var(--gradient-danger)',
 				'gradient-bg': 'var(--gradient-bg)'
 			},
 			boxShadow: {
-				'glow-green': 'var(--glow-green)',
-				'glow-red': 'var(--glow-red)',
-				'glow-blue': 'var(--glow-blue)'
+				'glow-cyan': 'var(--glow-cyan)',
+				'glow-teal': 'var(--glow-teal)',
+				'glow-subtle': 'var(--glow-subtle)'
 			},
 			animation: {
 				'pulse-glow': 'pulse-glow 2s ease-in-out infinite alternate',

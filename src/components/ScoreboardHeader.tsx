@@ -1,7 +1,5 @@
 import { ScoreData } from "@/types/scoring";
-import { Badge } from "@/components/ui/badge";
-import { Clock, RefreshCw, Shield, AlertTriangle } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Shield, Clock, Users, Activity } from "lucide-react";
 
 interface ScoreboardHeaderProps {
   scoreData: ScoreData | null;
@@ -11,78 +9,89 @@ interface ScoreboardHeaderProps {
 
 export const ScoreboardHeader = ({ scoreData, isLoading, lastUpdate }: ScoreboardHeaderProps) => {
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString();
+    return date.toLocaleTimeString('en-US', { 
+      hour12: true,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
   };
 
-  const getTimeSinceUpdate = () => {
-    if (!lastUpdate) return "Never";
-    const seconds = Math.floor((Date.now() - lastUpdate.getTime()) / 1000);
-    if (seconds < 60) return `${seconds}s ago`;
-    const minutes = Math.floor(seconds / 60);
-    if (minutes < 60) return `${minutes}m ago`;
-    const hours = Math.floor(minutes / 60);
-    return `${hours}h ago`;
+  const getEventRunningTime = () => {
+    if (!scoreData?.competition.startTime) return "0:00:00";
+    const start = new Date(scoreData.competition.startTime);
+    const now = new Date();
+    const diff = now.getTime() - start.getTime();
+    
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
-
-  const totalServices = scoreData?.teams.reduce((acc, team) => acc + team.services.length, 0) || 0;
-  const upServices = scoreData?.teams.reduce((acc, team) => 
-    acc + team.services.filter(s => s.status === 'up').length, 0
-  ) || 0;
 
   return (
-    <header className="bg-card border-b border-border p-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-          {/* Title Section */}
-          <div>
-            <h1 className="text-4xl font-bold bg-gradient-cyber bg-clip-text text-transparent">
-              {scoreData?.competition.name || "Cyber Defense Scoreboard"}
-            </h1>
-            <p className="text-muted-foreground mt-1">
-              Real-time competition monitoring system
-            </p>
+    <div className="text-center py-12">
+      {/* Logo and Title */}
+      <div className="flex flex-col items-center gap-4 mb-8">
+        <div className="relative">
+          <Shield className="w-16 h-16 text-atlantis-cyan animate-pulse-glow" />
+          <div className="absolute inset-0 w-16 h-16 border-2 border-atlantis-cyan rounded-lg animate-pulse opacity-30"></div>
+        </div>
+        <h1 className="text-4xl font-bold">
+          <span className="text-atlantis-cyan">ATLANTIS</span>{" "}
+          <span className="text-foreground">SCOREBOARD</span>
+        </h1>
+      </div>
+
+      {/* Teams Section */}
+      <div className="max-w-2xl mx-auto mb-8">
+        <div className="flex items-center gap-2 mb-6 text-atlantis-cyan">
+          <Users className="w-5 h-5" />
+          <h2 className="text-xl font-semibold">Teams</h2>
+        </div>
+      </div>
+
+      {/* Stats Panel */}
+      <div className="max-w-md mx-auto bg-atlantis-card border border-atlantis-border rounded-lg p-6 shadow-glow-subtle">
+        <div className="space-y-4 text-sm">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Users className="w-4 h-4 text-atlantis-cyan" />
+              <span className="text-atlantis-cyan">Total Teams:</span>
+            </div>
+            <span className="text-foreground font-mono">{scoreData?.teams.length || 0}</span>
           </div>
 
-          {/* Stats Section */}
-          <div className="flex flex-wrap gap-4">
-            <Badge variant="outline" className="flex items-center gap-2 px-3 py-2">
-              <Clock className="w-4 h-4" />
-              Round {scoreData?.round || 1}
-            </Badge>
-            
-            <Badge 
-              variant="outline" 
-              className={cn(
-                "flex items-center gap-2 px-3 py-2",
-                isLoading && "animate-pulse"
-              )}
-            >
-              <RefreshCw className={cn("w-4 h-4", isLoading && "animate-spin")} />
-              {isLoading ? "Updating..." : `Updated ${getTimeSinceUpdate()}`}
-            </Badge>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4 text-atlantis-cyan" />
+              <span className="text-atlantis-cyan">Last Check:</span>
+            </div>
+            <span className="text-foreground font-mono">
+              {lastUpdate ? formatTime(lastUpdate) : "Never"}
+            </span>
+          </div>
 
-            <Badge variant="outline" className="flex items-center gap-2 px-3 py-2">
-              <Shield className="w-4 h-4 text-status-up" />
-              {upServices}/{totalServices} Services Up
-            </Badge>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Activity className="w-4 h-4 text-atlantis-cyan" />
+              <span className="text-atlantis-cyan">Event Running Time:</span>
+            </div>
+            <span className="text-foreground font-mono">{getEventRunningTime()}</span>
+          </div>
 
-            <Badge variant="outline" className="flex items-center gap-2 px-3 py-2">
-              <AlertTriangle className="w-4 h-4 text-cyber-orange" />
-              {scoreData?.teams.length || 0} Teams
-            </Badge>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Shield className="w-4 h-4 text-atlantis-cyan" />
+              <span className="text-atlantis-cyan">Latest Inject:</span>
+            </div>
+            <span className="text-foreground font-mono text-xs">
+              System Health Check
+            </span>
           </div>
         </div>
-
-        {/* Competition Timer */}
-        {scoreData?.competition.startTime && (
-          <div className="mt-4 text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-muted rounded-full text-sm">
-              <Clock className="w-4 h-4" />
-              Competition started: {new Date(scoreData.competition.startTime).toLocaleString()}
-            </div>
-          </div>
-        )}
       </div>
-    </header>
+    </div>
   );
 };
