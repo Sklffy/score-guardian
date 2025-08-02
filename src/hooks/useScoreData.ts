@@ -74,10 +74,8 @@ export const useScoreData = (refreshInterval = 30000) => {
 // Mock data generator for demonstration
 const generateMockData = (): ScoreData => {
   const teams = [
-    { name: "Red Team Alpha", ip: "192.168.1.10" },
-    { name: "Blue Team Beta", ip: "192.168.1.11" },
-    { name: "Green Team Gamma", ip: "192.168.1.12" },
-    { name: "Yellow Team Delta", ip: "192.168.1.13" },
+    { name: "Red Team", ip: "192.168.1.10" },
+    { name: "Blue Team", ip: "192.168.1.11" },
   ];
 
   const services = [
