@@ -27,10 +27,12 @@ export const AtlantisTeamList = ({ teams }: AtlantisTeamListProps) => {
           <div
             key={team.id}
             className={cn(
-              "bg-atlantis-card border rounded-lg p-6 transition-all duration-300",
-              isLeading ? "border-atlantis-cyan shadow-glow-cyan" : "border-atlantis-border hover:border-atlantis-cyan/50",
-              "animate-fade-in"
+              "bg-atlantis-card border rounded-lg p-6 interactive-card hover-glow",
+              "transform transition-all duration-500 hover:scale-[1.02]",
+              isLeading ? "border-atlantis-cyan shadow-glow-cyan ring-2 ring-atlantis-cyan/30" : "border-atlantis-border hover:border-atlantis-cyan/50",
+              "fade-in-up"
             )}
+            style={{ animationDelay: `${index * 200}ms` }}
           >
             {/* Team Header */}
             <div className="flex items-center justify-between mb-6">
@@ -100,22 +102,25 @@ export const AtlantisTeamList = ({ teams }: AtlantisTeamListProps) => {
             {/* Service Details */}
             <div className="space-y-2">
               <h4 className="text-sm font-semibold text-muted-foreground mb-3">Service Details</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2">
-                {team.services.map((service) => (
-                  <div
-                    key={`${service.name}-${service.port}`}
-                    className={cn(
-                      "flex items-center justify-between p-2 rounded border text-xs",
-                      service.status === 'up' && "bg-status-up/10 border-status-up/30 text-status-up",
-                      service.status === 'down' && "bg-status-down/10 border-status-down/30 text-status-down",
-                      service.status === 'unknown' && "bg-status-unknown/10 border-status-unknown/30 text-status-unknown"
-                    )}
-                  >
-                    <span className="font-medium">{service.name}</span>
-                    <span className="font-mono">
-                      {service.status === 'up' ? '+' : service.status === 'down' ? '-' : '?'}{service.points}
-                    </span>
-                  </div>
+               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2">
+                 {team.services.map((service, serviceIndex) => (
+                   <div
+                     key={`${service.name}-${service.port}`}
+                     className={cn(
+                       "flex items-center justify-between p-2 rounded border text-xs cursor-pointer",
+                       "hover-lift click-bounce transform transition-all duration-300",
+                       "hover:shadow-lg hover:scale-105",
+                       service.status === 'up' && "bg-status-up/10 border-status-up/30 text-status-up hover:bg-status-up/20",
+                       service.status === 'down' && "bg-status-down/10 border-status-down/30 text-status-down hover:bg-status-down/20",
+                       service.status === 'unknown' && "bg-status-unknown/10 border-status-unknown/30 text-status-unknown hover:bg-status-unknown/20"
+                     )}
+                     style={{ animationDelay: `${(index * 200) + (serviceIndex * 50)}ms` }}
+                   >
+                     <span className="font-medium">{service.name}</span>
+                     <span className="font-mono font-bold">
+                       {service.status === 'up' ? '+' : service.status === 'down' ? '-' : '?'}{service.points}
+                     </span>
+                   </div>
                 ))}
               </div>
             </div>

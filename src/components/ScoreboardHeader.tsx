@@ -31,12 +31,19 @@ export const ScoreboardHeader = ({ scoreData, isLoading, lastUpdate }: Scoreboar
   };
 
   return (
-    <div className="text-center py-12">
+    <div className="text-center py-12 relative">
+      {/* Background particles effect */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-atlantis-cyan/20 rounded-full floating-animation"></div>
+        <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-atlantis-cyan/30 rounded-full floating-animation" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 left-3/4 w-1.5 h-1.5 bg-atlantis-cyan/25 rounded-full floating-animation" style={{animationDelay: '2s'}}></div>
+      </div>
+      
       {/* Logo and Title */}
-      <div className="flex flex-col items-center gap-4 mb-8">
-        <div className="relative">
-          <Shield className="w-16 h-16 text-atlantis-cyan animate-pulse-glow" />
-          <div className="absolute inset-0 w-16 h-16 border-2 border-atlantis-cyan rounded-lg animate-pulse opacity-30"></div>
+      <div className="flex flex-col items-center gap-4 mb-8 relative z-10">
+        <div className="relative group">
+          <Shield className="w-16 h-16 text-atlantis-cyan pulse-glow transition-all duration-500 group-hover:scale-110 cursor-pointer" />
+          <div className="absolute inset-0 w-16 h-16 border-2 border-atlantis-cyan rounded-lg animate-pulse opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
         </div>
         <h1 className="text-4xl font-bold">
           <span className="text-atlantis-cyan">ATLANTIS</span>{" "}

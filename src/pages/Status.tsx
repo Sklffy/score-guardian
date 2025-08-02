@@ -178,7 +178,7 @@ const Status = () => {
       {/* Footer */}
       <footer className="border-t border-atlantis-border py-6">
         <div className="max-w-7xl mx-auto px-6 text-center text-muted-foreground">
-          <p className="text-sm">© 2025 ATLANTIS Cyber Defense Platform. All rights reserved.</p>
+          <p className="text-sm">© 2025 Jonathan Geisler. All rights reserved.</p>
         </div>
       </footer>
     </div>
